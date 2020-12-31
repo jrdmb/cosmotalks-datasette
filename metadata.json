@@ -1,5 +1,5 @@
 {
-  "title": "Talks on Cosmology",
+  "title": "Cosmology Researcher Talks for Others in the Field",
   "license": "CC Attribution 1.0 License",
   "license_url": "https://creativecommons.org/publicdomain/zero/1.0/",
   "about": "CosmoTalks app and data",
@@ -8,16 +8,21 @@
    "cosmotalks": {
      "tables": {
        "talks": {
-        "sort": "rowid",
+        "sort_desc": "talkdate",
         "size": 50,
-        "facets": ["series"],
        },
        "series": {
-        "label_column": "series"
+        "sort": "series",
+        "label_column": "series",
        },
        "ytid": {
         "hidden": true
        }
+     },
+     "queries": {
+       "#Talks_by_Series": {
+         "sql": "select s.series, count(talk) as '# talks', s.talks_list, s.website from talks t inner join series s on t.series=s.id group by s.series order by s.series;"
+        }
      },
    },
   },

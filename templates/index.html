@@ -1,0 +1,25 @@
+{% extends "base.html" %}
+
+{% block title %}{{ metadata.title or "Datasette" }}: {% for database in databases %}{{ database.name }}{% if not loop.last %}, {% endif %}{% endfor %}{% endblock %}
+
+{% block body_class %}index{% endblock %}
+
+{% block content %}
+<h2>{{ metadata.title or "Datasette" }}</h2>
+
+<div style="margin-left:25px; font-size:1.4em;">
+<p><a style="text-decoration:none;" href="/cosmotalks/talks?_sort_desc=talkdate&talk__contains=">Talks Data</a> - 5,098 talks; default view is in descending talk date order</p>
+
+<p><a style="text-decoration:none;" href="/cosmotalks/talks?_sort_desc=rowid&talk__contains=">Newly Added</a> - most recent additions to the database including newly found older talks, not just latest by date</p>
+
+<p><a style="text-decoration:none;" href="/cosmotalks/series">Series Data</a> - 155 data sources</p>
+
+<p><a style="text-decoration:none;" href="/tips">Usage Tips</a> - important info for optimally using this app</p>
+
+<p><strong><a style="text-decoration:none;" href="https://jrdmb.netlify.app/crt.html">Alternative App</a> - latest data</strong> (see #6 in <a style="text-decoration:none;" href="/tips">Usage Tips</a>), simpler interface, fewer features, but <strong>live, most-up-to-date data</strong></p>
+
+<p><a style="text-decoration:none;" href="/about">About page</a> - basic info about this app</p>
+<br>
+</div>
+
+{% endblock %}

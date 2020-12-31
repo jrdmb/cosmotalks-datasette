@@ -8,8 +8,9 @@
 <script src="{{ urls.static('table.js') }}" defer></script>
 <style>
 .facet-info {
-  font-size: 0.85rem;
-  width: 400px !important;
+  font-size: 0.87rem;
+  font-weight: bold;
+  width: 450px !important;
   margin-right: 15px;
 }
 @media only screen and (max-width: 576px) {
@@ -117,7 +118,7 @@
         {% for key, value in form_hidden_args %}
             <input type="hidden" name="{{ key }}" value="{{ value }}">
         {% endfor %}
-        <input type="submit" value="Apply">
+        <input type="submit" value="Apply"> &nbsp;(Note: the 'contains' operator is typically a good choice)
     </div>
 </form>
 
@@ -133,7 +134,23 @@
 {% endif %}
 
 {% if query.sql and allow_execute_sql %}
-    <p><a class="not-underlined" title="{{ query.sql }}" href="{{ urls.database(database) }}?{{ {'sql': query.sql}|urlencode|safe }}{% if query.params %}&amp;{{ query.params|urlencode|safe }}{% endif %}">&#x270e; <span class="underlined">View and edit SQL</span></a> {% if table == 'series' %} &nbsp; | &nbsp; <a href="/cosmotalks/talks">Go to Talks table</a> {% endif %}  {% if table == 'talks' %} &nbsp; | &nbsp; <a href="/cosmotalks/series">Go to Series table</a> {% endif %} &nbsp; | &nbsp; <a href="/tips">Usage Tips</a> </p>
+    <p><a class="not-underlined" title="{{ query.sql }}" href="{{ urls.database(database) }}?{{ {'sql': query.sql}|urlencode|safe }}{% if query.params %}&amp;{{ query.params|urlencode|safe }}{% endif %}">&#x270e; <span class="underlined">View/Edit SQL</span></a> 
+  {% if table == 'series' %}
+    &nbsp;|&nbsp; <strong><a href="/cosmotalks/talks?_sort_desc=talkdate&talk__contains=">Talks table</a></strong>   
+      &nbsp;|&nbsp; <strong><a href="/cosmotalks?sql=select+s.series%2C+count%28talk%29+as+%27%23+talks%27%2C+s.talks_list%2C+s.website+from+talks+t+inner+join+series+s+on+t.series%3Ds.id+group+by+s.series+order+by+s.series">#Talks by Series</a></strong>
+  {% elif table == 'talks' %}
+    {% if 'order by talkdate' in query.sql %}
+      &nbsp;|&nbsp; <strong><a href="/cosmotalks/talks?_sort_desc=rowid&talk__contains=">Newly added talks</a></strong>
+    {% else %}
+      &nbsp;|&nbsp; <strong><a href="/cosmotalks/talks?_sort_desc=talkdate&talk__contains=">Most recent talks</a></strong>
+    {% endif %}
+    &nbsp;|&nbsp; <strong><a href="/cosmotalks/series">Series table</a></strong> 
+  {% endif %} 
+&nbsp;|&nbsp; <strong><a href="/tips">Usage Tips</a></strong> 
+&nbsp;|&nbsp; <strong><a href="http://jrdmb.netlify.app/crt.html">Alt. app</a></strong>
+&nbsp;|&nbsp; <strong><a href="/kitp">KITP sublistings</a></strong> 
+&nbsp;|&nbsp; <strong><a href="https://jrdmb.netlify.app/crt-topics.html">Topics index</a></strong> 
+&nbsp;|&nbsp; <strong><a href="https://github.com/jrdmb/cosmotalks-datasette">Github</a></strong> &nbsp; |</p> 
 {% endif %}
 
 <p class="export-links">This data as {% for name, url in renderers.items() %}<a href="{{ url }}">{{ name }}</a>{{ ", " if not loop.last }}{% endfor %}{% if display_rows %}, <a href="{{ url_csv }}">CSV</a> (<a href="#export">advanced</a>){% endif %}</p>
@@ -153,7 +170,7 @@
         {% for facet_info in sorted_facet_results %}
             <div class="facet-info facet-{{ database|to_css_class }}-{{ table|to_css_class }}-{{ facet_info.name|to_css_class }}" id="facet-{{ facet_info.name|to_css_class }}">
                 <p class="facet-info-name">
-                    <strong>{{ facet_info.name }}{% if facet_info.type != "column" %} ({{ facet_info.type }}){% endif %}</strong>
+                    <strong>{{ facet_info.name|capitalize }}</strong> <span style="font-weight:normal">(sorted by # talks; <strong>max 15 shown{% if facet_info.name == "series" %}; see <a href="/cosmotalks/series">Series table</a> for all</strong>){% endif %}</span>{% if facet_info.type != "column" %} ({{ facet_info.type }}){% endif %}
                     {% if facet_info.hideable %}
                         <a href="{{ facet_info.toggle_url }}" class="cross">&#x2716;</a>
                     {% endif %}
@@ -178,7 +195,7 @@
 {% include custom_table_templates %}
 
 {% if next_url %}
-     <p><a href="{{ next_url }}">Next page</a></p>
+     <p><a href="{{ next_url|replace("http://127.0.0.1:8001","") }}">Next page</a></p>
 {% endif %}
 
 {% if display_rows %}
@@ -196,7 +213,7 @@
                 CSV options:
                 <label><input type="checkbox" name="_dl"> download file</label>
                 {% if expandable_columns %}<label><input type="checkbox" name="_labels" checked> expand labels</label>{% endif %}
-                {% if next_url and config.allow_csv_stream %}<label><input type="checkbox" name="_stream"> stream all rows</label>{% endif %}
+                {% if next_url and settings.allow_csv_stream %}<label><input type="checkbox" name="_stream"> stream all rows</label>{% endif %}
                 <input type="submit" value="Export CSV">
                 {% for key, value in url_csv_hidden_args %}
                     <input type="hidden" name="{{ key }}" value="{{ value }}">

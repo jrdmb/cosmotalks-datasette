@@ -29,16 +29,36 @@
 
 ## Some Usage Tips  
 
-[Home](/) &nbsp; | &nbsp; [Talks](/cosmotalks/talks) &nbsp;  | &nbsp;  [Series](/cosmotalks/series)
+**[Home](/) &nbsp; | &nbsp; [Talks](/cosmotalks/talks) &nbsp; | &nbsp; [Series](/cosmotalks/series) &nbsp; | &nbsp; [About CosmoTalks](/about) &nbsp; | &nbsp; [KITP sublistings](/kitp) &nbsp; | **
 
-The [Talks page](/cosmotalks/talks) has input boxes for filtering the data, which is especially useful for the `talk` and/or `talkdate` columns. A wide range of operators are available, and 'contains' may be the most useful. But it's best not to try filtering on `series` from the Talks table page, instead it's recommended to use the [Series page](/cosmotalks/series). To explain why, look at the schema for the Talks table:
+(1) The Talks table rows by default are sorted in descending Talkdate order. Click the column header for Talk, Series, or Talkdate to change the sort order. Once a sort column is selected, click on it again to change ascending/descending order. The Series table is sorted by series name.
+
+(2) The [Talks page](/cosmotalks/talks) has input boxes for filtering the data, which is especially useful for the `talk` and/or `talkdate` columns. A wide range of operators are available, and 'contains' may be the most useful. But it's best not to filter on `series` from the Talks table page, instead it's recommended to use the [Series page](/cosmotalks/series). The reason is related to the schema for the Talks table:
 
 Talks table schema: `CREATE TABLE \"talks\" (\"talk\" TEXT, \"series\" INTEGER, \"talkdate\" TEXT)`
 
-The `series` column doesn't store the text name for the series but instead contains an integer foreign key value to the separate `series` lookup table. From a database design viewpoint, this is more efficient and much less prone to input errors.
+The `series` column in the Talks table doesn't store the text name for the series but instead contains an integer foreign key value equal to the separate `series` primary key index. From a database design viewpoint, this is more efficient and much less prone to input errors.
 
-So the suggestion is to use the [Series page](/cosmotalks/series) when wanting to view all talks for a series and filter by series name.  
+So the suggestion is to use the [Series page](/cosmotalks/series) when wanting to view all talks for a series name.  
 
+(3) There may be situations where different series have slightly different spellings for a speaker's name, especially with or without diacritics. When filtering the data at the Talks page, using the % wildcard character can help return all the relevant data. For example, to get all talks data that includes 'Haïmoud' and 'Haimoud', use a filter like this: 'talk contains ha%moud'. The % wildcard matches zero or more characters, the underscore character _ is another wildcard that matches any one character. An example that uses both wildcards for querying a name like Renée Hložek: `ren_e hlo_ek` or `ren%hlo_ek`.
+
+(4) In some cases, the series website has talk slides available in PDF format. They are not tracked in this database, but the website link on the [Series page](/cosmotalks/series) can be checked for any slides.
+
+(5) The Talks search page input boxes can be used for compound queries but it uses 'AND' logic only. How do I define an 'OR' query?
+
+A convenient way within this Cloud Run app is to fill the input boxes as if it were an AND query, then click the 'View and edit SQL' link and edit the SQL to change the AND operator to OR. The following link shows an example of an OR query: [link to an OR query example](/cosmotalks?sql=select+talk%2C+talkdate+from+talks+where+%22talk%22+like+%3Ap0+or++%22talk%22+like+%3Ap1+order+by+talkdate+desc&p0=%25frb%25&p1=%25fast+radio+burst%25)
+
+If you don't want to mess with SQL statements, use the [alternate app](https://jrdmb.netlify.app/crt.html) (see item 6 below) from which you can select the operator choice from a dropdown combo box.
+
+(6) In addition to this app, there is a simpler, quicker, though less full-featured [alternative app](https://jrdmb.netlify.app/crt/). The alternate version also has the advantage of more recent data updates than this Google Cloud Run app which is built using the [Baked Data model](https://simonwillison.net/2021/Jul/28/baked-data) and typically has new data published only periodically (~ every 1 to 2 weeks), as it requires a rebuild and upload of both the app code and its read-only [sqlite](https://www.sqlite.org/index.html) database. At the alternate site, any new updates show up immediately. If you're interested in seeing the most recent updates that have not yet been uploaded into this Cloud Run app, they are listed on [this page](https://jrdmb.netlify.app?fruo6fjhooe3ytfo).
+
+(7) What is the 'rowid' shown in the column filter drop-down input above the Apply button? How might that be useful?
+
+The rowid column is the primary key index for the talks and series database tables. It's numeric value is shown in the Link column in the table view. Filtering by rowid is potentially useful. Let's say you want to filter the data to show just a few specific data rows that you couldn't otherwise get via a different filter request. That could be done with rowid filter criteria: column => 'rowid', filter operator => 'in', text box => 10, 15, 35 (a comma-separated list of rowids). That will return just the rows with those rowid values.
+   
+    
+Last updated: 2022-06-13
 <p></p> 
 
 """) }}

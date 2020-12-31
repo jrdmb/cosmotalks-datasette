@@ -1,0 +1,76 @@
+{% extends "base.html" %}
+
+{% block title %}About CosmoTalks{% endblock %}
+
+{% block extra_head %}
+<style>
+ ul {
+   display: block;
+   list-style-type: disc;
+   margin-top: 1em;
+   margin-bottom: 1 em;
+   margin-left: 0;
+   margin-right: 0;
+   padding-left: 40px;
+ } 
+ code,kbd,pre,samp {
+   background: #f4f4f4;
+   border: 1px solid #ddd;
+   color: black;
+   font-family: monospace;
+   overflow: auto;
+   padding: 0.05em 0.15em;
+</style>
+{% endblock %}
+
+{% block content %}
+
+{{ render_markdown("""
+
+## KITP Programs/Conferences:
+
+**[Home](/) &nbsp; | &nbsp; [Talks](/cosmotalks/talks) &nbsp; | &nbsp; [Series](/cosmotalks/series) &nbsp; | &nbsp; [Usage Tips](/tips) &nbsp; | &nbsp; [About](/about) &nbsp; | **
+
+This is a talks breakdown of the separate programs and conferences within the overall 'KITP Cosmology Talks' series. Non-cosmology talks are excluded (loose exclusion criteria).
+
++ [**Applications of Gravitational Lensing: Unique Insights into Galaxy Formation and Evolution** (2006 Program)](/cosmotalks/talks?_sort=rowid&talk__contains=kitp.ucsb%25lens%2506)
++ [**Astrophysics and Cosmology with Galaxy Clusters** (2011 Conference)](/cosmotalks/talks?_sort=rowid&talk__contains=kitp.ucsb%25/gclusters_c11)
++ [**Blackboard Lunches**](/cosmotalks/talks?_sort=rowid&talk__contains=kitp.ucsb%25/bblunch)
++ [**Colloquia and Special Seminars**](/cosmotalks/talks?_sort=rowid&talk__contains=kitp.ucsb%25/colloq)
++ [**Dark matter detection and detectability: paradigm confirmation or shift?** (2018 conference)](/cosmotalks/talks?_sort=rowid&talk__contains=kitp.ucsb%25cdm-c18)
++ [**First Light and Faintest Dwarfs: Extreme Probes of the Cold Dark Matter Paradigm** (2012 Conference)](/cosmotalks/talks?_sort=rowid&talk__contains=kitp.ucsb%25dwarfgal_c12)
++ [**First Galaxies and Faint Dwarfs: Clues to the Small Scale Structure of Cold Dark Matter** (2012 Program)](/cosmotalks/talks?_sort=rowid&talk__contains=kitp.ucsb%25dwarfgal12)
++ [**Friends of the Kavli Institute for Theoretical Physics**](/cosmotalks/talks?_sort=rowid&talk__contains=kitp.ucsb%25/friends)
++ [**From Inflation to the Hot Big Bang** (2020 Program)](/cosmotalks/talks?_sort=rowid&talk__contains=kitp.ucsb%25/inflation20/)
++ [**Globular Clusters at the Nexus of Star and Galaxy Formation** (2020 Program)](/cosmotalks/talks?_sort=rowid&talk__contains=kitp.ucsb%25/clusters20)
++ [**Gravitational Holography** (2020 Program)](/cosmotalks/talks?_sort=rowid&talk__contains=kitp.ucsb%25/qgravity20)
++ [**Interdisciplinary Developments in Neutrino Physics (2022 conference)**](/cosmotalks/talks?_sort=rowid&talk__contains=kitp.ucsb%25/neutrinos_c22)
++ [**Inflationary Reheating Meets Particle Physics Frontier** (2020 Conference)](/cosmotalks/talks?_sort=rowid&talk__contains=kitp.ucsb%25inflation-c20/)
++ [**Jim Hartle: A man with no boundaries** (2019 birthday tribute)](/cosmotalks/talks?_sort=rowid&talk__contains=kitp.ucsb%25/hartle19/)
++ [**Joint Tuesday/Thursday Theory Seminars**](/cosmotalks/talks?_sort=rowid&talk__contains=kitp.ucsb%25joint98)
++ [**Molecules and dust as fuel to star formation** (2016 Program)](/cosmotalks/talks?_sort=rowid&talk__contains=kitp.ucsb%25colduniv-c16)
++ [**Nonequilibrium Dynamics in Particle Physics and Cosmology** (2008 Program)](/cosmotalks/talks?_sort=rowid&talk__contains=kitp.ucsb%25partcosmo%2508)
++ [**On the Origin, Nature, and Mixing of Multiphase Gas in Astrophysics** (2020 Conference)](/cosmotalks/talks?_sort=rowid&talk__contains=kitp.ucsb%25/multiphasegas_oc20)
++ [**Origin of the Vacuum Energy and Electroweak Scales** (2019 Program)](/cosmotalks/talks?_sort=rowid&talk__contains=kitp.ucsb%25enervac19)
++ [**Particlegenesis** (2014 Program)](/cosmotalks/talks?_sort=rowid&talk__contains=kitp.ucsb%25/particles14)
++ [**Primordial Cosmology** (2013 Program)](/cosmotalks/talks?_sort=rowid&talk__contains=kitp.ucsb%25/primocosmo)
++ [**Probing Effective Theories of Gravity in Strong Fields and Cosmology** (2020 Program)](/cosmotalks/talks?_sort=rowid&talk__contains=kitp.ucsb%25greft20/)
++ [**Public Lectures**](/cosmotalks/talks?_sort=rowid&talk__contains=kitp.ucsb%25/plecture)
++ [**Quantifying and Understanding the Galaxy-Halo Connection** (2017 Conference)](/cosmotalks/talks?_sort=rowid&talk__contains=kitp.ucsb%25/galhalo-c17)
++ [**Snowmass 2022 Theory Frontier**](/cosmotalks/talks?_sort=rowid&talk__contains=snowmass-c22)
++ [**String Phenomenology** (2006 Program)](/cosmotalks/talks?_sort=rowid&talk__contains=kitp.ucsb%25/strings%2506)
++ [**Tensions between the Early and the Late Universe** (2019 Conference)](/cosmotalks/talks?_sort=rowid&talk__contains=kitp.ucsb%25/enervac-c19)
++ [**The Cold Universe** (2016 Program)](/cosmotalks/talks?_sort=rowid&talk__contains=kitp.ucsb%25colduniv16)
++ [**The Galaxy-Halo Connection Across Cosmic Time** (2017 Program)](/cosmotalks/talks?_sort=rowid&talk__contains=kitp.ucsb%25/galhalo17)
++ [**The Galaxy-Halo Connection Across Cosmic Time: Recent Updates** (2020 Conference)](/cosmotalks/talks?_sort=rowid&talk__contains=kitp.ucsb%25/galhalo-oc20)
++ [**The Impact  of Feedback on Star and Galaxy Formation** (2014 Conference)](/cosmotalks/talks?_sort=rowid&talk__contains=kitp.ucsb%25/stars%2514)
++ [**The Small-Scape Structure of Cold(?) Dark Matter** (2018 Program)](/cosmotalks/talks?_sort=rowid&talk__contains=kitp.ucsb%25/cdm18)
++ [**The String Swampland and Quantum Gravity Constraints on Effective Theories** (2020 Program)](/cosmotalks/talks?_sort=rowid&talk__contains=kitp.ucsb%25/stringvacua20)
++ [**UV Meets the IR: Effective Field Theory Bounds from QFT to String Theory** (2020 Conference)](/cosmotalks/talks?_sort=rowid&talk__contains=kitp.ucsb%25/eftbounds_oc20)
+
+<p></p> 
+
+""") }}
+
+
+{% endblock %}

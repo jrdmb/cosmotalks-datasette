@@ -1,0 +1,47 @@
+{% extends "base.html" %}
+
+{% block title %}About CosmoTalks{% endblock %}
+
+{% block extra_head %}
+<style>
+ body {
+   color: gray;
+ }
+ h2 {
+   color:black;
+ }
+ ul {
+   display: block;
+   list-style-type: disc;
+   margin-top: 1em;
+   margin-bottom: 1 em;
+   margin-left: 0;
+   margin-right: 0;
+   padding-left: 0px;
+ } 
+ code,kbd,pre,samp {
+   background: #f4f4f4;
+   border: 1px solid #ddd;
+   color: black;
+   font-family: monospace;
+   overflow: auto;
+   padding: 0.05em 0.15em;
+</style>
+{% endblock %}
+
+{% block content %}
+
+<h2>Topics Index (Under Development)</h2>
+
+<a href="/cosmotalks/talks">Talks</a> | <a href="/cosmotalks/series">Series</a>  | <a href="/tips">Usage Tips</a> | <a href="/about">About</a> | 
+<br><br>
+<ul>
+<li><a href="/cosmotalks/talks?talk__contains=21%25cm&_sort_desc=talkdate">21 cm</a> | 
+<a href='/cosmotalks?sql=select+talk%2C+s.series%2C+talkdate+from+talks+t+inner+join+series+s+on+t.series%3Ds.id+where+("talk"+like+%3Ap0+or+"talk"+like+%3Ap1)+and+"talk"+not+like+%3Ap2+order+by+talkdate+desc&p0=%25+ACT%25&p1=%25ACTpol%25&p2=%25acti%25'>ACT/ACTpol</a> |
+<a href="/cosmotalks/talks?talk__contains=+ALMA&_sort_desc=talkdate">ALMA</a> | 
+</li>
+</ul>
+
+<p></p> 
+
+{% endblock %}

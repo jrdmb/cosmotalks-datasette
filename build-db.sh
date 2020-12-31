@@ -21,7 +21,8 @@ if [[  -f "$DBFILE" ]]; then
   mv $DBFILE $DBFILE.bkup
 fi
 
-csvs-to-sqlite cosmotalks.csv --replace-tables -c series:series:series -t talks $DBFILE
+# Disable default Full-Text Search for series: --no-fulltext-fks parameter
+csvs-to-sqlite cosmotalks.csv --replace-tables --no-fulltext-fks -c series:series:series -t talks $DBFILE
 csvs-to-sqlite series.csv --replace-tables -t series series.db
 
 echo 'Checking for any nulls in talk column; if there are any, cosmotalks.csv needs to be updated'
@@ -45,7 +46,7 @@ echo Add columns talks_list and website to the $DBFILE series table
 echo 'Creating 2 new columns in the series table'
 sqlite3 $DBFILE "alter table series add column talks_list text default ''; alter table series add column website text default '';"
 
-sqlite3 $DBFILE "attach database 'series.db' as db2; create table tempseries as select d.id, d.series, '[[link]](' || '/cosmotalks/talks?series=' || d.id || ')' as 'talks_list', '[[link]](' || d2.website || ')' as 'website' from series d join db2.series d2 on d.series = d2.series order by d.id;"
+sqlite3 $DBFILE "attach database 'series.db' as db2; create table tempseries as select d.id, d.series, '[[talks]](' || '/cosmotalks/talks?series=' || d.id || ')' as 'talks_list', '[[website]](' || d2.website || ')' as 'website' from series d join db2.series d2 on d.series = d2.series order by d.id;"
 
 sqlite3 $DBFILE "update series set talks_list = (select talks_list from tempseries t where series.id = t.id), website = (select website from tempseries t where series.id = t.id) where id in (select id from tempseries);"
 
