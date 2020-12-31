@@ -1,0 +1,23 @@
+{% extends "base.html" %}
+
+{% block title %}{{ metadata.title or "Datasette" }}: {% for database in databases %}{{ database.name }}{% if not loop.last %}, {% endif %}{% endfor %}{% endblock %}
+
+{% block body_class %}index{% endblock %}
+
+{% block content %}
+<h2>{{ metadata.title or "Datasette" }}</h2>
+
+<div style="margin-left:25px; font-size:1.4em;">
+<p><a style="text-decoration:none;" href="/cosmotalks/talks">Talks data</a> - 3,701 talks</p>
+
+<p><a style="text-decoration:none;" href="/cosmotalks/series">Series data</a> - 97 data sources</p>
+
+<p><a style="text-decoration:none;" href="/tips">Usage Tips</a> - important info</p>
+
+<p><a style="text-decoration:none;" href="https://jrdmb.netlify.app/crt.html">Alternative Search App</a> - latest data (see #8 in Usage Tips), simpler interface but fewer features</p>
+
+<p><a style="text-decoration:none;" href="/about">About</a></p>
+<br>
+</div>
+
+{% endblock %}

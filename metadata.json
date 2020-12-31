@@ -1,5 +1,5 @@
 {
-  "title": "Talks on Cosmology",
+  "title": "Cosmology Researcher Talks for Others in the Field",
   "license": "CC Attribution 1.0 License",
   "license_url": "https://creativecommons.org/publicdomain/zero/1.0/",
   "about": "CosmoTalks app and data",
@@ -13,6 +13,7 @@
         "facets": ["series"],
        },
        "series": {
+        "sort": "series",
         "label_column": "series"
        },
        "ytid": {
