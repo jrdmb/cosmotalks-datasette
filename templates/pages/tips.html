@@ -1,0 +1,47 @@
+{% extends "base.html" %}
+
+{% block title %}About CosmoTalks{% endblock %}
+
+{% block extra_head %}
+<style>
+ ul {
+   display: block;
+   list-style-type: disc;
+   margin-top: 1em;
+   margin-bottom: 1 em;
+   margin-left: 0;
+   margin-right: 0;
+   padding-left: 40px;
+ } 
+ code,kbd,pre,samp {
+   background: #f4f4f4;
+   border: 1px solid #ddd;
+   color: black;
+   font-family: monospace;
+   overflow: auto;
+   padding: 0.05em 0.15em;
+</style>
+{% endblock %}
+
+{% block content %}
+
+{{ render_markdown("""
+
+## Some Usage Tips  
+
+[Home](/) &nbsp; | &nbsp; [Talks](/cosmotalks/talks) &nbsp;  | &nbsp;  [Series](/cosmotalks/series)
+
+The [Talks page](/cosmotalks/talks) has input boxes for filtering the data, which is especially useful for the `talk` and/or `talkdate` columns. A wide range of operators are available, and 'contains' may be the most useful. But it's best not to try filtering on `series` from the Talks table page, instead it's recommended to use the [Series page](/cosmotalks/series). To explain why, look at the schema for the Talks table:
+
+Talks table schema: `CREATE TABLE \"talks\" (\"talk\" TEXT, \"series\" INTEGER, \"talkdate\" TEXT)`
+
+The `series` column doesn't store the text name for the series but instead contains an integer foreign key value to the separate `series` lookup table. From a database design viewpoint, this is more efficient and much less prone to input errors.
+
+So the suggestion is to use the [Series page](/cosmotalks/series) when wanting to view all talks for a series and filter by series name.  
+
+<p></p> 
+
+""") }}
+
+
+{% endblock %}

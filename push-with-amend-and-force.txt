@@ -1,0 +1,11 @@
+How to push to a repo to maintain only one commit – useful if you would otherwise have a whole bunch of data-hogging commits that aren't necessary to keep. From simonw: The latest til.db file is now stored in https://github.com/simonw/til-db – every time I push a new copy of the file there I use 
+
+git commit --amend 
+
+to rewrite history followed by 
+
+git push --force
+
+so that repo only ever contains a single commit which is the commit that added the file.
+
+source: https://github.com/simonw/til/issues/25#issuecomment-685310072

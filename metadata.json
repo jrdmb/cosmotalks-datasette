@@ -1,0 +1,34 @@
+{
+  "title": "Talks on Cosmology",
+  "license": "CC Attribution 1.0 License",
+  "license_url": "https://creativecommons.org/publicdomain/zero/1.0/",
+  "about": "CosmoTalks app and data",
+  "about_url": "/about",
+  "databases": {
+   "cosmotalks": {
+     "tables": {
+       "talks": {
+        "sort": "rowid",
+        "size": 50,
+        "facets": ["series"],
+       },
+       "series": {
+        "label_column": "series"
+       },
+       "ytid": {
+        "hidden": true
+       }
+     },
+   },
+  },
+  "plugins": {
+    "datasette-render-markdown": {
+      "columns": ["talk","talks_list","website"],
+      "path": "plugins/datasette_render_markdown/",
+      "extra_tags": ["img","br","ul","ol","li"],
+    },
+    "datasette-template-sql": {
+      "path": "plugins/datasette_template_sql/"
+    }
+  },
+}
