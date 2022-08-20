@@ -137,7 +137,7 @@
     <p><a class="not-underlined" title="{{ query.sql }}" href="{{ urls.database(database) }}?{{ {'sql': query.sql}|urlencode|safe }}{% if query.params %}&amp;{{ query.params|urlencode|safe }}{% endif %}">&#x270e; <span class="underlined">View/Edit SQL</span></a> 
   {% if table == 'series' %}
     &nbsp;|&nbsp; <strong><a href="/cosmotalks/talks?_sort_desc=talkdate&talk__contains=">Talks table</a></strong>   
-      &nbsp;|&nbsp; <strong><a href="/cosmotalks?sql=select+s.series%2C+count%28talk%29+as+%27%23+talks%27%2C+s.talks_list%2C+s.website+from+talks+t+inner+join+series+s+on+t.series%3Ds.id+group+by+s.series+order+by+s.series">#Talks by Series</a></strong>
+      &nbsp;|&nbsp; <strong><a href="/cosmotalks?sql=select+s.series%2C+count%28talk%29+as+%27%23+talks%27%2C+s.talks_list%2C+s.website%2c+s.series_info+from+talks+t+inner+join+series+s+on+t.series%3Ds.id+group+by+s.series+order+by+s.series">#Talks by Series</a></strong>
   {% elif table == 'talks' %}
     {% if 'order by talkdate' in query.sql %}
       &nbsp;|&nbsp; <strong><a href="/cosmotalks/talks?_sort_desc=rowid&talk__contains=">Newly added talks</a></strong>
