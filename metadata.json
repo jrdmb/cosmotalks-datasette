@@ -21,14 +21,14 @@
      },
      "queries": {
        "#Talks_by_Series": {
-         "sql": "select s.series, count(talk) as '# talks', s.talks_list, s.website from talks t inner join series s on t.series=s.id group by s.series order by s.series;"
+         "sql": "select s.series, count(talk) as '# talks', s.talks_list, s.website, s.series_info from talks t inner join series s on t.series=s.id group by s.series order by s.series;"
         }
      },
    },
   },
   "plugins": {
     "datasette-render-markdown": {
-      "columns": ["talk","talks_list","website"],
+      "columns": ["talk","series_info","talks_list","website","related_info"],
       "path": "plugins/datasette_render_markdown/",
       "extra_tags": ["img","br","ul","ol","li"],
     },

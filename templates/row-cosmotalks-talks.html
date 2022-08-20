@@ -55,6 +55,7 @@ is to display each column on a separate line (allowing for a nicer view for long
     <strong>Series name: {{ sname[0].series }} &nbsp;&nbsp; | &nbsp;&nbsp;
     <a href="/{{ database }}/{{ table }}?series={{ row.series }}">All Talks in Series</a></p>
     <p>Talk Date: {{ row["talkdate"] }}</strong></p>
+    <p><strong>Related Info: {{ render_markdown(row["related_info"]|e) }}</strong></p>
    {% set ytexists = sql("select name from sqlite_master where type='table' and name='ytids'") %}
    {% if ytexists %}
      {# {% set yid = sql("select ytid from ytids where rowid = ?", [row.rowid]) %} #}
